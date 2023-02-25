@@ -3,7 +3,9 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+
 using namespace std;
+
 int convToInt(char* v) {
 	if (strcmp(v, "0") == 0) {
 		return 0;
@@ -18,8 +20,38 @@ int convToInt(char* v) {
 	}
 }
 
-void sort() {
+void swapChar(char** a, char** b) {
+	char* aux = *a;
+	*a = *b;
+	*b = aux;
+}
 
+char* lowercase(char* v) {
+	for (unsigned short i = 0; i < strlen(v); i++) {
+		*(v + i) = tolower(*(v + i));
+	}
+	return v;
+}
+
+void bubbleSortChar(char*** vect, unsigned short size) {
+	for (unsigned short i = 0; i < size; i++) {
+		for (unsigned short j = i + 1; j <= size; j++) {
+			if (strlen(*(*vect + i)) < strlen(*(*vect + j))) {
+				swapChar((*vect + i), (*vect + j));
+			}
+			else if (strlen(*(*vect + i)) == strlen(*(*vect + j))) {
+				char* li = (char*)malloc(sizeof(char) * (strlen(*(*vect + i)) + 1));
+				strcpy_s(li, strlen(*(*vect + i)) + 1, *(*vect + i));
+				char* lj = (char*)malloc(sizeof(char) * (strlen(*(*vect + j)) + 1));
+				strcpy_s(lj, strlen(*(*vect + j)) + 1, *(*vect + j));
+				if (strcmp(lowercase(li), lowercase(lj)) > 0) {
+					swapChar((*vect + i), (*vect + j));
+				}
+				free(li);
+				free(lj);
+			}
+		}
+	}
 }
 
 int main() {
@@ -34,7 +66,6 @@ int main() {
 	printf("Sirul meu are valoarea: %s\n", sir);
 	printf("-----------------------------------------------------");
 	printf("\n\n");
-
 
 	printf("-----------------[EXEMPLU PROBLEMA 1]------------------------\n");
 	FILE* fp;
@@ -56,24 +87,36 @@ int main() {
 	}
 	printf("-----------------------------------------------------");
 	printf("\n\n");
-
 	printf("-----------------[EXEMPLU PROBLEMA 2]------------------------\n");
-	printf("Introduceti numarul de cuvinte din propozitie: ");
-	int numarCuvinte;
-	scanf_s("%d", &numarCuvinte);
 	printf("Introduceti o propozitie: ");
-	char cuvant[20];
-	char m[1000][20];
-	//scanf("%19s", cuvant);
-	int counter = 0;
-	while (scanf_s("%19s", cuvant, 19)) {
-		//if (strcmp(cuvant, "\n\n") == 0)
-		//	break;
-		printf("Cuvantul citit este: %s\n", cuvant);
-		counter += 1;
-		if (counter >= numarCuvinte)
+	unsigned int wordCounter = 0, alphaCounter = 0;
+	char** phrase = (char**)malloc(sizeof(char*) * (wordCounter + 1));
+	*(phrase + wordCounter) = (char*)malloc(sizeof(char) * (alphaCounter + 1));
+	while (scanf_s("%c", (*(phrase + wordCounter) + alphaCounter), 1)) {
+		if (*(*(phrase + wordCounter) + alphaCounter) == ' ') {
+			*(*(phrase + wordCounter) + alphaCounter) = '\0';
+			wordCounter++;
+			alphaCounter = 0;
+			phrase = (char**)realloc(phrase, sizeof(char*) * (wordCounter + 1));
+			*(phrase + wordCounter) = (char*)malloc(sizeof(char) * (alphaCounter + 1));
+		}
+		else if (strchr(".\n", *(*(phrase + wordCounter) + alphaCounter))) {
+			*(*(phrase + wordCounter) + alphaCounter) = '\0';
 			break;
+		}
+		else {
+			alphaCounter++;
+			*(phrase + wordCounter) = (char*)realloc(*(phrase + wordCounter), sizeof(char) * (alphaCounter + 1));
+		}
 	}
+	for (int i = 0; i <= wordCounter; i++) {
+		printf("%s\n", *(phrase + i));
+	}
+	bubbleSortChar(&phrase, wordCounter);
+	for (int i = 0; i <= wordCounter; i++) {
+		printf("%s\n", *(phrase + i));
+	}
+	free(phrase);
 	printf("-----------------------------------------------------");
 	printf("\n\n");
 
