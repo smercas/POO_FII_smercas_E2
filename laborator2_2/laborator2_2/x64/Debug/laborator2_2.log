@@ -1,6 +1,9 @@
-﻿  main.cpp
+﻿  global_functions.cpp
+  main.cpp
 C:\Users\Stefan\Desktop\oop\SursePOO\laborator2_2\laborator2_2\main.cpp(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Stefan\Desktop\oop\SursePOO\laborator2_2\laborator2_2\main.cpp(7,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator2_2\laborator2_2\main.cpp(11,24): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Stefan\Desktop\oop\SursePOO\laborator2_2\laborator2_2\main.cpp(14,30): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Stefan\Desktop\oop\SursePOO\laborator2_2\laborator2_2\main.cpp(15,25): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...
   laborator2_2.vcxproj -> C:\Users\Stefan\Desktop\oop\SursePOO\laborator2_2\x64\Debug\laborator2_2.exe
