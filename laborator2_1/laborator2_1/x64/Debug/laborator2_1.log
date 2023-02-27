@@ -1,0 +1,5 @@
+﻿  NumberList.cpp
+  main.cpp
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator2_1\laborator2_1\main.cpp(8,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  Generating Code...
+  laborator2_1.vcxproj -> C:\Users\Stefan\Desktop\oop\SursePOO\laborator2_1\x64\Debug\laborator2_1.exe
