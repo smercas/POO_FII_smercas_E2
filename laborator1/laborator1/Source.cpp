@@ -6,6 +6,48 @@
 
 using namespace std;
 
+void setOffset(char** v, unsigned offset, unsigned size) {
+	*(*v + size + offset) = '\0';
+	for (int i = size + offset - 1; i >= offset; i--) {
+		*(*v + i) = *(*v + i - offset);
+	}
+	for (int i = 0; i < offset; i++) {
+		*(*v + i) = '0';
+	}
+}
+void add(char** r, char* a) {
+	bool carryover = false;
+	if (strlen(a) > strlen(*r)) {
+		int os = strlen(a) - strlen(*r);
+		*r = (char*)realloc(*r, sizeof(char) * (strlen(a) + 1));
+		setOffset(&*r, os, strlen(*r));
+	}
+	for (int i = 1; i <= strlen(a); i++) {
+		*(*r + strlen(*r) - i) = *(*r + strlen(*r) - i) + *(a + strlen(a) - i) + carryover - '0';
+		if (*(*r + strlen(*r) - i) > '9') {
+			*(*r + strlen(*r) - i) = *(*r + strlen(*r) - i) - 10;
+			carryover = true;
+		}
+		else {
+			carryover = false;
+		}
+	}
+	for (int i = strlen(a) + 1; i <= strlen(*r); i++) {
+		*(*r + strlen(*r) - i) = *(*r + strlen(*r) - i) + carryover;
+		if (*(*r + strlen(*r) - i) > '9') {
+			*(*r + strlen(*r) - i) = *(*r + strlen(*r) - i) - 10;
+			carryover = true;
+		}
+		else {
+			carryover = false;
+		}
+	}
+	if (carryover == true) {
+		*r = (char*)realloc(*r, sizeof(char) * (strlen(*r) + 2));
+		setOffset(&*r, 1, strlen(*r));
+		**r = carryover + '0';
+	}
+}
 int convToInt(char* v) {
 	if (strcmp(v, "0") == 0) {
 		return 0;
@@ -19,20 +61,17 @@ int convToInt(char* v) {
 		return r;
 	}
 }
-
 void swapChar(char** a, char** b) {
 	char* aux = *a;
 	*a = *b;
 	*b = aux;
 }
-
 char* lowercase(char* v) {
 	for (unsigned short i = 0; i < strlen(v); i++) {
 		*(v + i) = tolower(*(v + i));
 	}
 	return v;
 }
-
 void bubbleSortChar(char*** vect, unsigned short size) {
 	for (unsigned short i = 0; i < size; i++) {
 		for (unsigned short j = i + 1; j <= size; j++) {
@@ -53,7 +92,6 @@ void bubbleSortChar(char*** vect, unsigned short size) {
 		}
 	}
 }
-
 int main() {
 	//Exemplificare printf
 	printf("-----------------[EXEMPLU CU PRINTF]------------------------\n");
@@ -74,6 +112,30 @@ int main() {
 	}
 	else {
 		printf("Am deschis fisierul cu success!\n");
+		unsigned literalSize = 0, maxSize = 0;
+		char* number = (char*)malloc(sizeof(char) * (literalSize + 1));
+		char* result = (char*)malloc(sizeof(char) * (literalSize + 2));
+		*(result + literalSize) = '0';
+		*(result + literalSize + 1) = '\0';
+		
+		while ((*(number + literalSize) = getc(fp)) != EOF) {
+			if (*(number + literalSize) == '\n') {
+				*(number + literalSize) = '\0';
+				add(&result, number);
+				literalSize = 0;
+			}
+			else {
+				if (maxSize <= literalSize) {
+					number = (char*)realloc(number, sizeof(char) * (literalSize + 2));
+					maxSize = literalSize + 1;
+				}
+				literalSize++;
+			}
+		}
+		printf("%s\n", result);
+		free(number);
+		free(result);
+		/*
 		char myString[200];
 		int sum = 0;
 		while (fgets(myString, 200, fp)) {
@@ -83,13 +145,14 @@ int main() {
 			sum = sum + convToInt(myString);
 		}
 		printf("%d\n", sum);
+		/**/
 		fclose(fp);
 	}
 	printf("-----------------------------------------------------");
 	printf("\n\n");
 	printf("-----------------[EXEMPLU PROBLEMA 2]------------------------\n");
 	printf("Introduceti o propozitie: ");
-	unsigned int wordCounter = 0, alphaCounter = 0;
+	unsigned wordCounter = 0, alphaCounter = 0;
 	char** phrase = (char**)malloc(sizeof(char*) * (wordCounter + 1));
 	*(phrase + wordCounter) = (char*)malloc(sizeof(char) * (alphaCounter + 1));
 	while (scanf_s("%c", (*(phrase + wordCounter) + alphaCounter), 1)) {
