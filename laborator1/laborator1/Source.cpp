@@ -179,6 +179,9 @@ int main() {
 	for (int i = 0; i <= wordCounter; i++) {
 		printf("%s\n", *(phrase + i));
 	}
+	for (int i = 0; i <= wordCounter; i++) {
+		free(*(phrase + i));
+	}
 	free(phrase);
 	printf("-----------------------------------------------------");
 	printf("\n\n");

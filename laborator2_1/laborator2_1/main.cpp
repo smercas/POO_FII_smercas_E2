@@ -1,5 +1,3 @@
-//#define vName(a) #a
-
 #include <iostream>
 #include "NumberList.h"
 
