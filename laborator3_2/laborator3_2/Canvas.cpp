@@ -6,6 +6,21 @@ using namespace std;
 int ax[4] = { 1, 0, -1, 0 };
 int ay[4] = { 0, 1, 0, -1 };
 
+void Canvas::PlotPixel(int x1, int y1, int x2, int y2, int dx, int dy, char ch)
+{
+    int pk = 2 * dy - dx;
+    for (int i = 0; i <= dx && this->IsPixelOnCanvas(x1, y1); i++) {
+        this->SetPoint(x1, y1, ch);
+        x1 < x2 ? x1++ : x1--;
+        if (pk < 0) {
+            pk = pk + 2 * dy;
+        }
+        else {
+            y1 < y2 ? y1++ : y1--;
+            pk = pk + 2 * dy - 2 * dx;
+        }
+    }
+}
 Canvas::Canvas(int height, int width) {
     this->height = height;
     this->width = width;
@@ -98,7 +113,7 @@ void Canvas::DrawCircle(int x, int y, int ray, char ch) {
         }
     }
 }
-void Canvas::FillCircle(int x, int y, int ray, char ch, int rx, int ry) {
+void Canvas::FillCircle(int x, int y, int ray, char ch) {
     this->DrawCircle(x, y, ray, ch);
     for (int i = x - ray; i < x + ray; i++) {
         for (int j = y - ray; j < y + ray; j++) {
@@ -152,21 +167,6 @@ void Canvas::FillRect(int top, int left, int bottom, int right, char ch) {
 }
 void Canvas::SetPoint(int x, int y, char ch) {
     *(*(this->m + x) + y) = ch;
-}
-void Canvas::PlotPixel(int x1, int y1, int x2, int y2, int dx, int dy, char ch)
-{
-    int pk = 2 * dy - dx;
-    for (int i = 0; i <= dx && this->IsPixelOnCanvas(x1, y1); i++) {
-        this->SetPoint(x1, y1, ch);
-        x1 < x2 ? x1++ : x1--;
-        if (pk < 0) {
-            pk = pk + 2 * dy;
-        }
-        else {
-            y1 < y2 ? y1++ : y1--;
-            pk = pk + 2 * dy - 2 * dx;
-        }
-    }
 }
 void Canvas::DrawLine(int x1, int y1, int x2, int y2, char ch) {
     int dx = x2 - x1;

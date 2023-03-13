@@ -11,7 +11,7 @@ public:
 	bool IsPixelOnCanvas(int x, int y);
 	void Fill(int x, int y, char ch);
 	void DrawCircle(int x, int y, int ray, char ch);
-	void FillCircle(int x, int y, int ray, char ch, int rx = 0, int ry = 0);
+	void FillCircle(int x, int y, int ray, char ch);
 	void DrawRect(int top, int left, int bottom, int right, char ch);
 	void FillRect(int top, int left, int bottom, int right, char ch);
 	void SetPoint(int x, int y, char ch);

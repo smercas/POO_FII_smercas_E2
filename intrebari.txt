@@ -1,0 +1,5 @@
+1. daca o functie foloseste malloc, cum poti sa dealochezi memoria intr-un mod diferit de:
+char* p = do_stuff();
+cout << p;
+free (p);
+
