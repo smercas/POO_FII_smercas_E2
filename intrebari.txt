@@ -1,5 +1,14 @@
-1. daca o functie foloseste malloc, cum poti sa dealochezi memoria intr-un mod diferit de:
-char* p = do_stuff();
-cout << p;
-free (p);
+1. a move constructor doesn't call the destructor on the class instance where from which the data was moved, but an operator= overload does. why?
 
+2. considering we have 3 class instances, along with how they're initialised:
+Number a("100", 10);	//line 1
+Number b("9090", 10);	//line 2
+Number c = a + b;		//line 3
+c = b + a;			//line 4
+if the operator+ overload returns a std::move(object):
+line 3 will call the move constructor 
+line 4 will call the move constructor and the operator= overload(in this exact order)
+why does line 4 move the object twice?
+if the operator+ overload simply returns the result object, then both line 3 and 4 will make a copy of the result which is not deleted afterwards, how does that work?
+
+3. Why does hit Number::Number (const char*, uint8_t, char = '+') not register properly as a method overload when removing the char = '+' part?

@@ -1,0 +1,13 @@
+﻿  Number.cpp
+  binary_arithmetic.cpp
+  char_and_int_interpretations.cpp
+  constructors.cpp
+  main.cpp
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\laborator5\main.cpp(10,12): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'uint64_t'
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\laborator5\main.cpp(10,12): message : consider using '%lld' in the format string
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\laborator5\main.cpp(10,12): message : consider using '%Id' in the format string
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\laborator5\main.cpp(10,12): message : consider using '%I64d' in the format string
+  relational_operators.cpp
+  unary_arithmetic.cpp
+  Generating Code...
+  laborator5.vcxproj -> C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\x64\Debug\laborator5.exe

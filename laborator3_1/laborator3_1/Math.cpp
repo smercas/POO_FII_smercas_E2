@@ -45,12 +45,7 @@ int Math::Add(int count, ...) {
 	return sum;
 }
 void charAddition(char& s, char a, char b, bool& co) {
-	if (b >= '0' && b <= '9') {
-		s = a + b + co - '0';
-	}
-	else {
-		s = a + co;
-	}
+	s = a + b + co - '0';
 	if (s > '9') {
 		s = s - 10;
 		co = true;
@@ -72,11 +67,11 @@ char* Math::Big_Numbers_Add(const char* a, const char* b) {
 		charAddition(*(sum + strlen(sum) - i), *(a + strlen(a) - i), *(b + strlen(b) - i), carryover);
 	}
 	for (unsigned i = strlen(b) + 1; i <= strlen(a); i++) {
-		charAddition(*(sum + strlen(sum) - i), *(a + strlen(a) - i), NULL, carryover);
+		charAddition(*(sum + strlen(sum) - i), *(a + strlen(a) - i), '0', carryover);
 	}
 	if (carryover) {
 		sum = (char*)realloc(sum, sizeof(char) * (strlen(sum) + 2));
-		for (int i = strlen(sum) + 1; i > 0; i--) {
+		for (unsigned i = strlen(sum) + 1; i > 0; i--) {
 			*(sum + i) = *(sum + i - 1);
 		}
 		*sum = '1';
