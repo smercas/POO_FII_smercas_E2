@@ -10,4 +10,11 @@ C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\laborator5\main.cpp(10,12): mess
   relational_operators.cpp
   unary_arithmetic.cpp
   Generating Code...
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\laborator5\binary_arithmetic.cpp(6): warning C4172: returning address of local variable or temporary
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\laborator5\binary_arithmetic.cpp(9): warning C4172: returning address of local variable or temporary
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\laborator5\binary_arithmetic.cpp(12): warning C4172: returning address of local variable or temporary
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\laborator5\binary_arithmetic.cpp(21): warning C4172: returning address of local variable or temporary
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\laborator5\binary_arithmetic.cpp(27): warning C4172: returning address of local variable or temporary
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\laborator5\binary_arithmetic.cpp(33): warning C4172: returning address of local variable or temporary
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\laborator5\binary_arithmetic.cpp(37): warning C4172: returning address of local variable or temporary
   laborator5.vcxproj -> C:\Users\Stefan\Desktop\oop\SursePOO\laborator5\x64\Debug\laborator5.exe

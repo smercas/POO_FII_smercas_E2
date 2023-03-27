@@ -528,13 +528,6 @@ Number& Number::operator= (Number& toCopy) {
 	}
 	return *this;
 }
-//Having the method return a reference
-//(Number& Number::operator+ instead of Number Number::operator+)
-//would result in the user being able to do stuff like:
-//(a + b) = c
-//that causes a memory leak for sure((a + b) is stored god knows where, idk).
-//...
-
 Number& Number::operator= (int64_t toCopy) {
 	free(this->number);
 	this->number = Conv_Int64_T_To_Char(toCopy, this->base);
@@ -573,11 +566,33 @@ void Number::SwitchBase(uint8_t newBase) {
 			return;
 		}
 		if (strcmp(this->number, "0")) {
-			if (this->base != 10) {
-				this->SwitchBaseTo10();
+			uint8_t i = 1;
+			uint8_t pow = this->base;
+			while (pow < newBase) {
+				pow = pow * this->base;
+				++i;
 			}
-			if (newBase != 10) {
-				this->SwitchBaseFrom10(newBase);
+			if (pow == newBase) {
+
+			}
+			else {
+				i = 1;
+				pow = newBase;
+				while (pow < this->base) {
+					pow = pow * newBase;
+					++i;
+				}
+				if (pow == this->base) {
+
+				}
+				else {
+					if (this->base != 10) {
+						this->SwitchBaseTo10();
+					}
+					if (newBase != 10) {
+						this->SwitchBaseFrom10(newBase);
+					}
+				}
 			}
 		}
 	}
