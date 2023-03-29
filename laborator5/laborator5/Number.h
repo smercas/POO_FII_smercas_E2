@@ -48,7 +48,7 @@ public:
 
 	//assignment operator
 	Number& operator= (Number&&) noexcept;
-	Number& operator= (Number&);
+	Number& operator= (const Number&);
 	Number& operator= (int64_t);
 	Number& operator= (const char*); //this looks like a horrible idea
 

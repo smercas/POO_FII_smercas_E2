@@ -1,6 +1,2 @@
 ﻿  main.cpp
-  Math.cpp
-C:\Users\Stefan\Desktop\oop\SursePOO\laborator3_1\laborator3_1\Math.cpp(74,2): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
-C:\Users\Stefan\Desktop\oop\SursePOO\laborator3_1\laborator3_1\Math.cpp(79,3): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
   laborator3_1.vcxproj -> C:\Users\Stefan\Desktop\oop\SursePOO\laborator3_1\x64\Debug\laborator3_1.exe

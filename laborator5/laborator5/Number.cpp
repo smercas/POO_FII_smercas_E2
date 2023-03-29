@@ -511,7 +511,7 @@ Number& Number::operator= (Number&& toMove) noexcept {
 	return *this;
 }
 //this allows chaining (a = b = c = 0)
-Number& Number::operator= (Number& toCopy) {
+Number& Number::operator= (const Number& toCopy) {
 	if (SHOW_C_D_M_MESSAGES) {
 		printf("Class instance Copied by assignment: (s)\t%p | %c%s | %hhu.\n\t\t\t\t    (d)\t%p | %c%s | %hhu.\n", &toCopy, toCopy.sign, toCopy.number, toCopy.base, this, this->sign, this->number, this->base);
 	}

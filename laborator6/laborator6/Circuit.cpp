@@ -33,8 +33,10 @@ Circuit::Circuit(Car* firstCar, const Weather weather, const double length) {
 	if (this->cars == nullptr) {
 		printf("OOPSIE, can't allocate enough heap memory.\n");
 	}
-	this->cars[0] = firstCar;	//maybe giving out references is not the greatest idea but idk what else to do(operator= overload?)
-								//would be nice if i didn't forget to ask this at the end
+	this->cars[0] = firstCar;	//idk how but it would be nice if i could call a copy constructor here
+								//giving out references to heap allocated class instances makes it so if the user deletes
+								//a car added with addCar() the car vector will have an invalid car
+								//I've confirmed this theory like 5 seconds ago so that stuff above this is a valid concern
 	this->weather = weather;
 	this->length = length;
 	this->numberOfCars = 1;
@@ -67,7 +69,7 @@ void Circuit::AddCar(Car* car) {
 	for (uint64_t i = 0; i < this->numberOfCars; ++i) {
 		aux[i] = this->cars[i];
 	}
-	aux[this->numberOfCars] = car;	//same as before (line 36, bad idea)
+	aux[this->numberOfCars] = car;	//same idea as on line 36
 	delete[] this->cars;
 	this->cars = aux;
 	aux = nullptr;

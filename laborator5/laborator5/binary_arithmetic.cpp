@@ -49,6 +49,7 @@ Number& Number::operator+= (const Number& toAdd) {
 	*this = *this + toAdd;
 	return *this;
 }
+//maybe you should test if writing return *this + toAdd also works(don't know why it wouldn't work but who knows, you know?)
 Number& Number::operator+= (const int64_t& toAdd) {
 	*this = *this + Number(toAdd);
 	return *this;
