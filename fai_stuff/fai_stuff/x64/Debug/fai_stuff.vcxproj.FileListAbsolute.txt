@@ -1,0 +1,3 @@
+C:\Users\Stefan\Desktop\oop\SursePOO\fai_stuff\fai_stuff\x64\Debug\fai_stuff.vcxproj.MdMergeInputs.cache
+C:\Users\Stefan\Desktop\oop\SursePOO\fai_stuff\fai_stuff\x64\Debug\fai_stuff.vcxproj.cppwinrt_plat.cache
+C:\Users\Stefan\Desktop\oop\SursePOO\fai_stuff\fai_stuff\x64\Debug\fai_stuff.vcxproj.cppwinrt_comp.cache
