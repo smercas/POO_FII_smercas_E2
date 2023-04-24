@@ -65,6 +65,7 @@ void Circuit::AddCar(Car* car) {
 	Car** aux = new Car*[this->numberOfCars + 1];
 	if (aux == nullptr) {
 		printf("OOPSIE, can't allocate enough heap memory.\n");
+		exit(1);
 	}
 	for (uint64_t i = 0; i < this->numberOfCars; ++i) {
 		aux[i] = this->cars[i];

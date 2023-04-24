@@ -29,7 +29,6 @@ int main() {
 	A->add_node('N', "c", 2);
 	A->add_node('I', "c", 2);
 
-
 	A->add_node('G', "c", 3);
 	A->add_node('H', "c", 3);
 	A->add_node('J', "c", 3);
@@ -56,5 +55,4 @@ int main() {
 	A->rec_print_simplified("-");
 	A->delete_node();
 	A = nullptr;
-
 }

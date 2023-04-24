@@ -1,0 +1,3 @@
+C:\Users\Stefan\Desktop\oop\Partial\laborator8\laborator8\x64\Debug\laborator8.vcxproj.MdMergeInputs.cache
+C:\Users\Stefan\Desktop\oop\Partial\laborator8\laborator8\x64\Debug\laborator8.vcxproj.cppwinrt_plat.cache
+C:\Users\Stefan\Desktop\oop\Partial\laborator8\laborator8\x64\Debug\laborator8.vcxproj.cppwinrt_comp.cache

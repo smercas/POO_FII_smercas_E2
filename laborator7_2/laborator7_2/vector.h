@@ -89,7 +89,7 @@ public:
 	}
 	//sorts the vector based on the recieved compare function
 	//if nullptr is recieved, do operator<
-	void sort(bool (*compare)(const T&, const T&) = [](const T& a, const T& b) { return a < b; }) {
+	void sort(bool (*compare)(const T&, const T&) = T.operator<) {
 		//no idea how to pass operator< as a default for the callback
 		//i've been thinking of using less and greater but at the same time they're not operator< and operator>
 		if (this->size == 0) {
@@ -155,7 +155,7 @@ public:
 	}
 	//returns the index at which the callback function returns true
 	//if there's no such element in the vector, might as well return this->size (this-size can't ever be returned otherwise)
-	uint64_t firstIndexOf(const T& value, bool (*condition)(const T&, const T&) = [](const T& a, const T& b) { return a == b; }) {
+	uint64_t firstIndexOf(const T& value, bool (*condition)(const T&, const T&) = T.operator==) {
 		for (uint64_t i = 0; i < this->size; ++i) {
 			if (condition(this->values[i], value) == 0) {
 				return i;
