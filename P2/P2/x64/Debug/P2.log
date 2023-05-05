@@ -1,0 +1,16 @@
+﻿  main.cpp
+C:\Users\Stefan\Desktop\oop\Partial\P2\P2\main.cpp(11,12): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'uint64_t'
+C:\Users\Stefan\Desktop\oop\Partial\P2\P2\main.cpp(11,12): message : consider using '%lld' in the format string
+C:\Users\Stefan\Desktop\oop\Partial\P2\P2\main.cpp(11,12): message : consider using '%Id' in the format string
+C:\Users\Stefan\Desktop\oop\Partial\P2\P2\main.cpp(11,12): message : consider using '%I64d' in the format string
+C:\Users\Stefan\Desktop\oop\Partial\P2\P2\main.cpp(11,12): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'uint64_t'
+C:\Users\Stefan\Desktop\oop\Partial\P2\P2\main.cpp(11,12): message : consider using '%lld' in the format string
+C:\Users\Stefan\Desktop\oop\Partial\P2\P2\main.cpp(11,12): message : consider using '%Id' in the format string
+C:\Users\Stefan\Desktop\oop\Partial\P2\P2\main.cpp(11,12): message : consider using '%I64d' in the format string
+C:\Users\Stefan\Desktop\oop\Partial\P2\P2\main.cpp(11,12): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 3 has type 'uint64_t'
+C:\Users\Stefan\Desktop\oop\Partial\P2\P2\main.cpp(11,12): message : consider using '%lld' in the format string
+C:\Users\Stefan\Desktop\oop\Partial\P2\P2\main.cpp(11,12): message : consider using '%Id' in the format string
+C:\Users\Stefan\Desktop\oop\Partial\P2\P2\main.cpp(11,12): message : consider using '%I64d' in the format string
+  Matrix.cpp
+  Generating Code...
+  P2.vcxproj -> C:\Users\Stefan\Desktop\oop\Partial\P2\x64\Debug\P2.exe

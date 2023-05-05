@@ -1,0 +1,44 @@
+﻿  main.cpp
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(117,1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(118): message : see reference to class template instantiation 'Map<k,v,h,e,bucket_size>::Base_Iterator' being compiled
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(162): message : see reference to class template instantiation 'Map<k,v,h,e,bucket_size>' being compiled
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(117,40): error C2143: syntax error: missing ',' before '&'
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(117,1): error C2803: 'operator ==' must have at least one formal parameter of class type
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(117,1): error C2805: binary 'operator ==' has too few parameters
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(118,4): error C2059: syntax error: 'return'
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(118,1): error C2238: unexpected token(s) preceding ';'
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(120,2): error C2143: syntax error: missing ';' before '}'
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(121,1): error C2518: keyword 'typename' is invalid in a base class list; expected a class name
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(122): message : see reference to class template instantiation 'Map<k,v,h,e,bucket_size>::Iterator' being compiled
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(121,1): error C2504: 'Map<int,const char *,std::hash<int>,std::equal_to<k>,3>::Base_Iterator': base class undefined
+          with
+          [
+              k=int
+          ]
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(122,24): error C2027: use of undefined type 'Map<int,const char *,std::hash<int>,std::equal_to<k>,3>::Base_Iterator'
+          with
+          [
+              k=int
+          ]
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(78): message : see declaration of 'Map<int,const char *,std::hash<int>,std::equal_to<k>,3>::Base_Iterator'
+          with
+          [
+              k=int
+          ]
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\Map.h(122,3): error C3881: can only inherit constructor from direct base
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\main.cpp(16,34): error C2676: binary '!=': 'Map<int,const char *,std::hash<int>,std::equal_to<k>,3>::Iterator' does not define this operator or a conversion to a type acceptable to the predefined operator
+          with
+          [
+              k=int
+          ]
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\main.cpp(16,34): error C2675: unary '++': 'Map<int,const char *,std::hash<int>,std::equal_to<k>,3>::Iterator' does not define this operator or a conversion to a type acceptable to the predefined operator
+          with
+          [
+              k=int
+          ]
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\main.cpp(16,35): error C2100: illegal indirection
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\main.cpp(16,13): error C3448: the number of identifiers must match the number of array elements or members in a structured binding declaration
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator9\laborator9\main.cpp(19,23): fatal error C1903: unable to recover from previous error(s); stopping compilation
+  INTERNAL COMPILER ERROR in 'C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\bin\HostX64\x64\CL.exe'
+      Please choose the Technical Support command on the Visual C++
+      Help menu, or open the Technical Support help file for more information

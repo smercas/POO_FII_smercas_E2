@@ -1,0 +1,12 @@
+﻿  Fractie.cpp
+  main.cpp
+C:\Users\Stefan\Desktop\oop\Partial\P1\P1\main.cpp(22,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'uint64_t'
+C:\Users\Stefan\Desktop\oop\Partial\P1\P1\main.cpp(22,9): message : consider using '%lld' in the format string
+C:\Users\Stefan\Desktop\oop\Partial\P1\P1\main.cpp(22,9): message : consider using '%Id' in the format string
+C:\Users\Stefan\Desktop\oop\Partial\P1\P1\main.cpp(22,9): message : consider using '%I64d' in the format string
+C:\Users\Stefan\Desktop\oop\Partial\P1\P1\main.cpp(22,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 2 has type 'uint64_t'
+C:\Users\Stefan\Desktop\oop\Partial\P1\P1\main.cpp(22,9): message : consider using '%lld' in the format string
+C:\Users\Stefan\Desktop\oop\Partial\P1\P1\main.cpp(22,9): message : consider using '%Id' in the format string
+C:\Users\Stefan\Desktop\oop\Partial\P1\P1\main.cpp(22,9): message : consider using '%I64d' in the format string
+  Generating Code...
+  P1.vcxproj -> C:\Users\Stefan\Desktop\oop\Partial\P1\x64\Debug\P1.exe
