@@ -1,0 +1,22 @@
+﻿  Array.cpp
+  main.cpp
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator10\laborator10\main.cpp(41,12): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'uint64_t'
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator10\laborator10\main.cpp(41,12): message : consider using '%lld' in the format string
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator10\laborator10\main.cpp(41,12): message : consider using '%Id' in the format string
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator10\laborator10\main.cpp(41,12): message : consider using '%I64d' in the format string
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator10\laborator10\main.cpp(44,16): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'T *'
+          with
+          [
+              T=int
+          ]
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator10\laborator10\main.cpp(44,16): warning C4313: 'printf': '%d' in format string conflicts with argument 1 of type 'T *'
+          with
+          [
+              T=int
+          ]
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+C:\Users\Stefan\Desktop\oop\SursePOO\laborator10\laborator10\main.cpp(10): warning C4715: 'CompareGreater<int>': not all control paths return a value
+  All 59 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  laborator10.vcxproj -> C:\Users\Stefan\Desktop\oop\SursePOO\laborator10\x64\Release\laborator10.exe

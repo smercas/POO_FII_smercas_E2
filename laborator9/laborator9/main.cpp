@@ -3,6 +3,7 @@
 #include "Node.h"
 #include "List.h"
 #include "Map.h"
+#include <tuple>
 
 int main()
 {
@@ -12,7 +13,7 @@ int main()
 	m[10] = "C++";
 	m[20] = "test";
 	m[30] = "Poo";
-	//std::cout << std::boolalpha << m.Includes(f);
+	std::cout << std::boolalpha << m.Includes(f) << std::endl;
 	for (auto [key, value, index] : m)
 	{
 		printf("Index:%d, Key=%d, Value=%s\n"

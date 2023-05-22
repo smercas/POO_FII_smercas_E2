@@ -1,0 +1,4 @@
+C:/Users/Stefan/Desktop/oop/SursePOO/laborator11/cmake-build-debug-visual-studio/CMakeFiles/sort.dir
+C:/Users/Stefan/Desktop/oop/SursePOO/laborator11/cmake-build-debug-visual-studio/CMakeFiles/laborator11.dir
+C:/Users/Stefan/Desktop/oop/SursePOO/laborator11/cmake-build-debug-visual-studio/CMakeFiles/ALL_BUILD.dir
+C:/Users/Stefan/Desktop/oop/SursePOO/laborator11/cmake-build-debug-visual-studio/CMakeFiles/ZERO_CHECK.dir

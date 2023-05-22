@@ -75,19 +75,19 @@ public:
 		}
 		return false;
 	}
-	class Iterator {
+	class iterator {
 	private:
 		friend class Map;
-		Map* map = nullptr;
+		Map<k, v, h, e, bucket_size>* map = nullptr;
 		uint64_t index = 0;
 		Node<k, v>* node = nullptr;
-		Iterator(Map* map, uint64_t index, Node<k, v>* node) {
+		iterator(Map<k, v, h, e, bucket_size>* map, uint64_t index, Node<k, v>* node) {
 			this->map = map;
 			this->index = index;
 			this->node = node;
 		}
 	public:
-		Iterator(const Iterator& other) {
+		iterator(const iterator& other) {
 			this->map = other.map;
 			this->index = other.index;
 			this->node = other.node;
@@ -96,9 +96,9 @@ public:
 			return std::tuple<k, v, uint64_t>(this->node->k(), this->node->v(), h{}(this->node->k()) % bucket_size);
 			//return std::tuple<k, v, uint64_t>(this->node->k(), this->node->v(), this->node->k() % bucket_size);
 		}
-		Iterator& operator++() {
+		iterator operator++() {
 			if (this->node->n() != nullptr) {
-				this->node = node->next;
+				this->node = this->node->n();
 			}
 			else {
 				++index;
@@ -114,49 +114,136 @@ public:
 			}
 			return *this;
 		}
-		Iterator& operator++(int32_t) {
-			Iterator temp(*this);
+		iterator& operator++(int32_t) {
+			iterator temp(*this);
 			++(*this);
 			return temp;
 		}
-		friend bool operator==(const Iterator& a, const Iterator& b) {
+		friend bool operator==(const iterator& a, const iterator& b) {
 			return a.map == b.map && a.index == b.index && a.node == b.node;
 		}
 	};
-	Iterator begin() {
+	class const_iterator {
+	private:
+		friend class Map;
+		const Map<k, v, h, e, bucket_size>* map = nullptr;
+		uint64_t index = 0;
+		const Node<k, v>* node = nullptr;
+		const_iterator(const Map<k, v, h, e, bucket_size>* map, uint64_t index, const Node<k, v>* node) {
+			this->map = map;
+			this->index = index;
+			this->node = node;
+		}
+	public:
+		const_iterator() {
+			this->map = nullptr;
+			this->index = 0;
+			this->node = nullptr;
+		}
+		const_iterator(const const_iterator& other) {
+			this->map = other.map;
+			this->index = other.index;
+			this->node = other.node;
+		}
+		std::tuple<k, v, uint64_t> operator*() {
+			return std::tuple<k, v, uint64_t>(this->node->key, this->node->value, h{}(this->node->key) % bucket_size);
+			//return std::tuple<k, v, uint64_t>(this->node->k(), this->node->v(), this->node->k() % bucket_size);
+		}
+		const_iterator operator++() {
+			if (this->node->next != nullptr) {
+				this->node = this->node->next;
+			}
+			else {
+				++index;
+				while (this->index < bucket_size && this->map->bucket[index]->l() == 0) {
+					++index;
+				}
+				if (this->index < bucket_size) {
+					this->node = this->map->bucket[index]->f();
+				}
+				else {
+					this->node = nullptr;
+				}
+			}
+			return *this;
+		}
+		const_iterator& operator++(int32_t) {
+			const_iterator temp(*this);
+			++(*this);
+			return temp;
+		}
+		friend bool operator==(const const_iterator& a, const const_iterator& b) {
+			return a.map == b.map && a.index == b.index && a.node == b.node;
+		}
+	};
+	iterator begin() {
 		uint64_t index = 0;
 		while (index < bucket_size && this->bucket[index]->l() == 0) {
 			++index;
 		}
 		if (index < bucket_size) {
-			return Iterator(this, index, this->bucket[index]->f());
+			return iterator(this, index, this->bucket[index]->f());
 		}
 		else {
 			return this->end();
 		}
 	}
-	const Iterator cbegin() {
-		return this->begin();
+	const iterator begin() const {
+		uint64_t index = 0;
+		while (index < bucket_size && this->bucket[index]->l() == 0) {
+			++index;
+		}
+		if (index < bucket_size) {
+			return iterator(this, index, this->bucket[index]->f());
+		}
+		else {
+			return this->end();
+		}
 	}
-	Iterator end() {
-		return Iterator(this, bucket_size, nullptr);
+	const_iterator cbegin() const {
+		uint64_t index = 0;
+		while (index < bucket_size && this->bucket[index]->l() == 0) {
+			++index;
+		}
+		if (index < bucket_size) {
+			return const_iterator(this, index, this->bucket[index]->f());
+		}
+		else {
+			return this->cend();
+		}
 	}
-	const Iterator cend() {
-		return this->end();
+	iterator end() {
+		return iterator(this, bucket_size, nullptr);
 	}
-	/*
-	bool Includes(const Map<k, v, h, e>& map) {
-		typename Map<k, v, h, e>::Iterator I = map.cbegin();
-		//for (auto [key, value, index] : map) {
+	const iterator end() const {
+		return iterator(this, bucket_size, nullptr);
+	}
+	const_iterator cend() const {
+		return const_iterator(this, bucket_size, nullptr);
+	}
+	/**/
+	bool Includes(const Map<k, v, h, e>& map) const {
+		/**/
+		for (auto [key, value, index] : map) {
+			if (this->bucket[h{}(key) % bucket_size]->get(key) == nullptr) {
+				//if (this->bucket[key % bucket_size]->get(key) == nullptr) {
+				return false;
+			}
+		}
+		/**/
+		/*
+		const_iterator I(map.cbegin());
+		//for (const auto [key, value, index] : map) {
 		while (I != map.cend()) {
-			const int key = std::get<0>(*I);
+			const k key = std::get<0>(*I);
 			if (this->bucket[h{}(key) % bucket_size]->get(key) == nullptr) {
 				//if (this->bucket[key % bucket_size]->get(key) == nullptr) {
 				return false;
 			}
 			++I;
 		}
+		*/
 		return true;
 	}
-	*/
+	/**/
 };

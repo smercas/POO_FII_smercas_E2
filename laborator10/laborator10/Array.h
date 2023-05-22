@@ -44,16 +44,44 @@ public:
 	virtual bool CompareElements(void* e1, void* e2) = 0;
 };
 
-template<class T>
-class ArrayIterator {
-private:
-	int32_t Current; // mai adaugati si alte date si functii necesare pentru iterator
-public:
-	ArrayIterator();
-	ArrayIterator& operator ++ ();
-	ArrayIterator& operator -- ();
-	bool operator==(ArrayIterator<T>&);
-	T& operator*();
+template<typename T>
+class CompareGreater : public Compare {
+	virtual bool CompareElements(void* a, void* b) override final {
+		if ((T*)a > (T*)b) {
+			return true;
+		}
+		return false;
+	}
+};
+
+template<typename T>
+class CompareLesser : public Compare {
+	virtual bool CompareElements(void* a, void* b) override final {
+		if ((T*)a < (T*)b) {
+			return true;
+		}
+		return false;
+	}
+};
+
+template<typename T>
+class CompareEqual : public Compare {
+	virtual bool CompareElements(void* a, void* b) override final {
+		if ((T*)a == (T*)b) {
+			return true;
+		}
+		return false;
+	}
+};
+
+template<typename T>
+class CompareNotEqual : public Compare {
+	virtual bool CompareElements(void* a, void* b) override final {
+		if ((T*)a != (T*)b) {
+			return true;
+		}
+		return false;
+	}
 };
 
 template<class T, class e = std::equal_to<T>, class l = std::less<T>>
@@ -85,7 +113,8 @@ public:
 		this->Size = 0;
 		uint64_t i = 0;
 		while (i < this->Capacity) {
-			this->List = nullptr;
+			this->List[i] = nullptr;
+			++i;
 		}
 	}
 	Array(const Array<T>& otherArray) {
@@ -113,8 +142,8 @@ public:
 				throw idne;
 			}
 		}
-		catch (std::exception& e) {
-			printf("Exception: %s.\n", e.what());
+		catch (std::exception& ex) {
+			printf("Exception: %s.\n", ex.what());
 		}
 		return this->List[index];
 	}
@@ -128,8 +157,9 @@ public:
 				throw ic_sgtcolt0;
 			}
 		}
-		catch (std::exception& e) {
-			printf("Exception: %s.\n", e.what());
+		catch (std::exception& ex) {
+			printf("Exception: %s.\n", ex.what());
+			return *this;
 		}
 		uint64_t i = 0;
 		while (this->List[i] != nullptr) {
@@ -142,7 +172,8 @@ public:
 	const Array<T>& Insert(int index, const T& newElem) {
 		ioob_e ioob; af_e af; ic_sgtcolt0_e ic_sgtcolt0; iae_e iae;
 		try {
-			if (index >= this->Size) {
+			if (index >= this->Capacity)
+			{
 				throw ioob;
 			}
 			if (this->Size == this->Capacity) {
@@ -155,8 +186,9 @@ public:
 				throw iae;
 			}
 		}
-		catch (std::exception& e) {
-			printf("Exception: %s.\n", e.what());
+		catch (std::exception& ex) {
+			printf("Exception: %s.\n", ex.what());
+			return *this;
 		}
 		this->List[index] = new T(newElem);
 		++this->Size;
@@ -185,8 +217,9 @@ public:
 				++i;
 			}
 		}
-		catch (std::exception& e) {
-			printf("Exception: %s.\n", e.what());
+		catch (std::exception& ex) {
+			printf("Exception: %s.\n", ex.what());
+			return *this;
 		}
 		uint64_t i = 0;
 		while (i < otherArray.Capacity) {
@@ -214,8 +247,9 @@ public:
 				throw idne;
 			}
 		}
-		catch (std::exception& e) {
-			printf("Exception: %s.\n", e.what());
+		catch (std::exception& ex) {
+			printf("Exception: %s.\n", ex.what());
+			return *this;
 		}
 		delete this->List[index];
 		this->List[index] = nullptr;
@@ -313,7 +347,7 @@ public:
 		while (i < this->Capacity - 1) {
 			j = i + 1;
 			while (j < this->Capacity) {
-				if (this->List[i] != nullptr && this->List[j] != nullptr && comparator->CompareElements(*(this->List[i]), *(this->List[j]))) {
+				if (this->List[i] != nullptr && this->List[j] != nullptr && comparator->CompareElements((void*)(this->List[i]), (void*)(this->List[j]))) {
 					aux = this->List[i];
 					this->List[i] = this->List[j];
 					this->List[j] = aux;
@@ -326,46 +360,46 @@ public:
 	}
 	//returns the position of the element within the array or this->Capacity if it hasn't been found
 	uint64_t BinarySearchHelper(const T& elem, uint64_t begin, uint64_t end) {
-		if (begin != end) {
+		if (begin <= end) {
 			uint64_t middle = (begin + end) / 2;
-			if (e{}(*(this->List[middle]), elem)) {
+			if (this->List[middle] != nullptr && e{}(*(this->List[middle]), elem)) {
 				return middle;
 			}
 			else {
-				return BinarySearchHelper(elem, begin, middle) + BinarySearchHelper(elem, middle, end) - this->Capacity;
+				return BinarySearchHelper(elem, begin, middle) + BinarySearchHelper(elem, middle + 1, end);
 			}
 		}
-		return this->Capacity;
+		return 0;
 	}
 	uint64_t BinarySearch(const T& elem) {
 		return BinarySearchHelper(elem, 0, this->Capacity);
 	}
 	uint64_t BinarySearchHelper(const T& elem, uint64_t begin, uint64_t end, bool (*compare)(const T&, const T&)) {
-		if (begin != end) {
+		if (begin <= end) {
 			uint64_t middle = (begin + end) / 2;
-			if (compare(*(this->List[middle]), elem)) {
+			if (this->List[middle] != nullptr && compare(*(this->List[middle]), elem)) {
 				return middle;
 			}
 			else {
-				return BinarySearchHelper(elem, begin, middle, compare) + BinarySearchHelper(elem, middle, end, compare) - this->Capacity;
+				return BinarySearchHelper(elem, begin, middle, compare) + BinarySearchHelper(elem, middle + 1, end, compare);
 			}
 		}
-		return this->Capacity;
+		return 0;
 	}
 	uint64_t BinarySearch(const T& elem, int(*compare)(const T&, const T&)) {
 		return BinarySearchHelper(elem, 0, this->Capacity, compare);
 	}
 	uint64_t BinarySearchHelper(const T& elem, uint64_t begin, uint64_t end, Compare* comparator) {
-		if (begin != end) {
+		if (begin <= end) {
 			uint64_t middle = (begin + end) / 2;
-			if (comparator->CompareElements(*(this->List[middle]), elem)) {
+			if (this->List[middle] != nullptr && comparator->CompareElements(*(this->List[middle]), elem)) {
 				return middle;
 			}
 			else {
-				return BinarySearchHelper(elem, begin, middle, comparator) + BinarySearchHelper(elem, middle, end, comparator) - this->Capacity;
+				return BinarySearchHelper(elem, begin, middle, comparator) + BinarySearchHelper(elem, middle + 1, end, comparator);
 			}
 		}
-		return this->Capacity;
+		return 0;
 	}
 	uint64_t BinarySearch(const T& elem, Compare* comparator) {
 		return BinarySearchHelper(elem, 0, this->Capacity, comparator);
@@ -397,10 +431,50 @@ public:
 	uint64_t GetCapacity() {
 		return this->Capacity;
 	}
-	ArrayIterator<T> GetBeginIterator() {
-		return ArrayIterator(0);
+	template<class T, class e = std::equal_to<T>, class l = std::less<T>>
+	class ArrayIterator {
+	private:
+		friend class Array;
+		Array<T, e, l>* _array;
+		uint64_t current;
+	public:
+		ArrayIterator(Array<T, e, l>* _array) {
+			this->_array = _array;
+			this->current = 0;
+		}
+		ArrayIterator(Array<T, e, l>* _array, uint64_t position) {
+			this->_array = _array;
+			this->current = position;
+		}
+		ArrayIterator& operator++() {
+			do {
+				++this->current;
+			} while (this->_array->List[current] == nullptr && this->current < this->_array->Capacity);
+			return *this;
+		}
+		ArrayIterator& operator--() {
+			do {
+				--this->current;
+			} while (this->_array->List(current) == nullptr && this->current < this->_array->Capacity);
+			if (this->current > this->_array->Capacity) {
+				this->current = this->_array->Capacity;
+			}
+			return *this;
+		}
+		friend bool operator==(const ArrayIterator<T, e, l>& a, const ArrayIterator<T, e, l>& b) {
+			return a._array == b._array && a.current == b.current;
+		}
+		friend bool operator!=(const ArrayIterator<T, e, l>& a, const ArrayIterator<T, e, l>& b) {
+			return a._array != b._array || a.current != b.current;
+		}
+		T& operator*() {
+			return *(this->_array->List[current]);
+		}
+	};
+	ArrayIterator<T, e, l> begin() {
+		return ArrayIterator<T, e, l>(this, 0);
 	}
-	ArrayIterator<T> GetEndIterator() {
-		return ArrayIterator(this->Capacity);
+	ArrayIterator<T, e, l> end() {
+		return ArrayIterator<T, e, l>(this, this->Capacity);
 	}
 };
