@@ -12,7 +12,7 @@ int32_t main() {
 	else {
 		//obj.find_all_occurences_lean(input, "BABABXBABAB", "BABX");
 		//kmp::find_all_occurences(output, "ABAAABCABAABCABC", "ABAABCAB");
-		bm::find_all_occurences(output, "ABAABBBABABBAA", "ABBA");
+		kmp::find_all_occurences(output, "ABAABBBABABBAA", "ABBA");
 		fclose(output);
 	}
 	return 0;

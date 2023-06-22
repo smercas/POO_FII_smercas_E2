@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <string_view>
 
 enum class Type {
 	Friend,
@@ -9,12 +8,16 @@ enum class Type {
 };
 
 class Contact {
-	std::string name;
-public:
+protected:
 	Contact();
+	Contact(const Type&);
 	Contact(const std::string&);
-	virtual ~Contact();
+	Contact(const std::string&, const Type&);
+public:
+	std::string name;
+	Type type;
+	/*virtual ~Contact();
 	std::string getName();
 	void setName(const std::string&);
-	virtual Type getType() = 0;
+	virtual Type getType() = 0;*/
 };

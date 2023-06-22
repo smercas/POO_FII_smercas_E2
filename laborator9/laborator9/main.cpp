@@ -4,9 +4,9 @@
 #include "List.h"
 #include "Map.h"
 #include <tuple>
+#include <vector>
 
-int main()
-{
+int main() {
 	Map<int, const char*> f;
 	f[10] = "lol";
 	Map<int, const char*> m;	// m[4] will be the 0-th position in the bucket array if you use a hash
@@ -14,16 +14,12 @@ int main()
 	m[20] = "test";
 	m[30] = "Poo";
 	std::cout << std::boolalpha << m.Includes(f) << std::endl;
-	for (auto [key, value, index] : m)
-	{
-		printf("Index:%d, Key=%d, Value=%s\n"
-			, index, key, value);
+	for (auto [key, value, index] : m) {
+		printf("Index:%llu, Key=%d, Value=%s\n", index, key, value);
 	}
 	m[20] = "result";
-	for (auto [key, value, index] : m)
-	{
-		printf("Index:%d, Key=%d, Value=%s\n"
-			, index, key, value);
+	for (auto [key, value, index] : m) {
+		printf("Index:%llu, Key=%d, Value=%s\n", index, key, value);
 	}
 	return 0;
 }

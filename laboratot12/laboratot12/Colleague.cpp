@@ -1,6 +1,6 @@
 #include "Colleague.h"
 
-Colleague::Colleague() : Contact() {
+Colleague::Colleague() : Contact(Type::Colleague) {
 	this->telephoneNumber = std::string();
 	this->company = std::string();
 	this->emailAddress = std::string();
@@ -9,7 +9,7 @@ Colleague::Colleague() : Contact() {
 Colleague::Colleague(const std::string& name_,
 					 const std::string& telephoneNumber_,
 					 const std::string& company_,
-					 const std::string& emailAddress_) : Contact(name_) {
+					 const std::string& emailAddress_) : Contact(name_, Type::Colleague) {
 	this->telephoneNumber = telephoneNumber_;
 	this->company = company_;
 	this->emailAddress = emailAddress_;
@@ -43,6 +43,6 @@ void Colleague::setEmailAddress(const std::string& emailAddress_) {
 	this->emailAddress = emailAddress_;
 }
 
-Type Colleague::getType() {
-	return Type::Colleague;
-}
+//Type Colleague::getType() {
+//	return Type::Colleague;
+//}

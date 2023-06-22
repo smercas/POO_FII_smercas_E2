@@ -16,8 +16,7 @@ int main() {
     arr.Sort(x);
 
     printf("Searching binary for 8: Index:%llu\n", arr.BinarySearch(8));
-    for (auto it : arr)
-    {
+    for (auto it : arr) {
         printf("%d ", it);
     }
 }

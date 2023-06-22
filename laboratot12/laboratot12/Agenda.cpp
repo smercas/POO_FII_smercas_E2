@@ -14,7 +14,7 @@ Agenda::~Agenda() {
 
 Contact* Agenda::searchContact(const std::string& name) {
 	for (auto contact : this->contacts) {
-		if (contact->getName() == name) {
+		if (contact->name == name) {
 			return contact;
 		}
 	}
@@ -24,8 +24,8 @@ Contact* Agenda::searchContact(const std::string& name) {
 std::vector<Friend*> Agenda::getFriends() {
 	std::vector<Friend*> friends = std::vector<Friend*>();
 	for (auto& contact : this->contacts) {
-		if (contact->getType() == Type::Friend) {
-			friends.push_back(dynamic_cast<Friend*>(contact));
+		if (contact->type == Type::Friend) {
+			friends.push_back(static_cast<Friend*>(contact));
 		}
 	}
 	return friends;
@@ -34,7 +34,7 @@ std::vector<Friend*> Agenda::getFriends() {
 void Agenda::deleteContact(const std::string& name) {
 	std::vector<Contact*>::iterator contact = this->contacts.begin();
 	while (contact != this->contacts.end()) {
-		if ((*contact)->getName() == name) {
+		if ((*contact)->name == name) {
 			this->contacts.erase(contact);
 		}
 		++contact;

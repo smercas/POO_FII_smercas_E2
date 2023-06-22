@@ -1,11 +1,11 @@
 #include "Associate.h"
 
-Associate::Associate() : Contact() {
+Associate::Associate() : Contact(Type::Associate) {
 	this->telephoneNumber = std::string();
 }
 
 Associate::Associate(const std::string& name_,
-					 const std::string& telephoneNumber_) : Contact(name_) {
+					 const std::string& telephoneNumber_) : Contact(name_, Type::Associate) {
 	this->telephoneNumber = telephoneNumber_;
 }
 
@@ -21,6 +21,6 @@ void Associate::setTelephoneNumber(const std::string& telephoneNumber_) {
 	this->telephoneNumber = telephoneNumber_;
 }
 
-Type Associate::getType() {
-	return Type::Associate;
-}
+//Type Associate::getType() {
+//	return Type::Associate;
+//}

@@ -1,6 +1,7 @@
 ﻿  Agenda.cpp
   Associate.cpp
   Colleague.cpp
+  Contact.cpp
   Friend.cpp
   main.cpp
   Generating Code...

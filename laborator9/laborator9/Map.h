@@ -77,10 +77,10 @@ public:
 	}
 	class iterator {
 	private:
-		friend class Map;
-		Map<k, v, h, e, bucket_size>* map = nullptr;
-		uint64_t index = 0;
-		Node<k, v>* node = nullptr;
+		friend class Map;	//needed for the begin and end methods, since they use a private constructor
+		Map<k, v, h, e, bucket_size>* map;
+		uint64_t index;
+		Node<k, v>* node;
 		iterator(Map<k, v, h, e, bucket_size>* map, uint64_t index, Node<k, v>* node) {
 			this->map = map;
 			this->index = index;
@@ -101,10 +101,9 @@ public:
 				this->node = this->node->n();
 			}
 			else {
-				++index;
-				while (this->index < bucket_size && this->map->bucket[index]->l() == 0) {
+				do {
 					++index;
-				}
+				} while (this->index < bucket_size && this->map->bucket[index]->l() == 0);
 				if (this->index < bucket_size) {
 					this->node = this->map->bucket[index]->f();
 				}
@@ -125,10 +124,10 @@ public:
 	};
 	class const_iterator {
 	private:
-		friend class Map;
-		const Map<k, v, h, e, bucket_size>* map = nullptr;
-		uint64_t index = 0;
-		const Node<k, v>* node = nullptr;
+		friend class Map;	//needed for the begin and end methods, since they use a private constructor
+		const Map<k, v, h, e, bucket_size>* map;
+		uint64_t index;
+		const Node<k, v>* node;
 		const_iterator(const Map<k, v, h, e, bucket_size>* map, uint64_t index, const Node<k, v>* node) {
 			this->map = map;
 			this->index = index;
@@ -154,10 +153,9 @@ public:
 				this->node = this->node->next;
 			}
 			else {
-				++index;
-				while (this->index < bucket_size && this->map->bucket[index]->l() == 0) {
+				do {
 					++index;
-				}
+				} while (this->index < bucket_size && this->map->bucket[index]->l() == 0);
 				if (this->index < bucket_size) {
 					this->node = this->map->bucket[index]->f();
 				}
@@ -188,17 +186,8 @@ public:
 			return this->end();
 		}
 	}
-	const iterator begin() const {
-		uint64_t index = 0;
-		while (index < bucket_size && this->bucket[index]->l() == 0) {
-			++index;
-		}
-		if (index < bucket_size) {
-			return iterator(this, index, this->bucket[index]->f());
-		}
-		else {
-			return this->end();
-		}
+	const_iterator begin() const {
+		return this->cbegin();
 	}
 	const_iterator cbegin() const {
 		uint64_t index = 0;
@@ -215,35 +204,39 @@ public:
 	iterator end() {
 		return iterator(this, bucket_size, nullptr);
 	}
-	const iterator end() const {
-		return iterator(this, bucket_size, nullptr);
+	const_iterator end() const {
+		return this->cend();
 	}
 	const_iterator cend() const {
 		return const_iterator(this, bucket_size, nullptr);
 	}
-	/**/
 	bool Includes(const Map<k, v, h, e>& map) const {
+		//both of these approaches work now
 		/**/
-		for (auto [key, value, index] : map) {
-			if (this->bucket[h{}(key) % bucket_size]->get(key) == nullptr) {
+		//for (auto [key, value, index] : map) {
+		//	if (this->bucket[h{}(key) % bucket_size]->get(key) == nullptr) {
+		//		//if (this->bucket[key % bucket_size]->get(key) == nullptr) {
+		//		return false;
+		//	}
+		//}
+		for (auto it : map) {
+			if (this->bucket[h{}(std::get<0>(it)) % bucket_size]->get(std::get<0>(it)) == nullptr) {
 				//if (this->bucket[key % bucket_size]->get(key) == nullptr) {
 				return false;
 			}
 		}
-		/**/
-		/*
-		const_iterator I(map.cbegin());
+		/*/
+		auto I = map.begin();
 		//for (const auto [key, value, index] : map) {
-		while (I != map.cend()) {
+		while (I != map.end()) {
 			const k key = std::get<0>(*I);
 			if (this->bucket[h{}(key) % bucket_size]->get(key) == nullptr) {
-				//if (this->bucket[key % bucket_size]->get(key) == nullptr) {
+			//if (this->bucket[key % bucket_size]->get(key) == nullptr) {
 				return false;
 			}
 			++I;
 		}
-		*/
+		/**/
 		return true;
 	}
-	/**/
 };

@@ -36,7 +36,7 @@ Number Number::operator-- () {
 		exit(3);
 	}
 	aux[strlen(this->number) - 1] = '\0';
-	for (uint64_t i = 0; i < strlen(aux); ++i) {
+	for (uint64_t i = 0; i < strlen(this->number); ++i) {
 		aux[i] = this->number[i + 1];
 	}
 	free(this->number);
@@ -45,17 +45,7 @@ Number Number::operator-- () {
 	return *this;
 }
 Number Number::operator-- (int) {
-	char* aux = (char*)malloc(strlen(this->number));
-	if (aux == nullptr) {
-		HEAP_ALLOCATION_FAILURE_ERROR;
-		exit(3);
-	}
-	aux[strlen(this->number) - 1] = '\0';
-	for (uint64_t i = 0; i < strlen(aux); ++i) {
-		aux[i] = this->number[i];
-	}
-	free(this->number);
-	this->number = aux;
-	aux = nullptr;
-	return *this;
+	Number temp(*this);
+	--(*this);
+	return temp;
 }

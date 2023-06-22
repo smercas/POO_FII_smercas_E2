@@ -1,6 +1,6 @@
 #include "Friend.h"
 
-Friend::Friend() : Contact() {
+Friend::Friend() : Contact(Type::Friend) {
     this->dateOfBirth = std::array<uint64_t, 3>();
     this->telephoneNumber = std::string();
     this->emailAddress = std::string();
@@ -9,7 +9,7 @@ Friend::Friend() : Contact() {
 Friend::Friend(const std::string& name_,
                const std::array<uint64_t, 3>& dateOfBirth_,
                const std::string& telephoneNumber_,
-               const std::string& emailAddress_) : Contact(name_) {
+               const std::string& emailAddress_) : Contact(name_, Type::Friend) {
     this->dateOfBirth = dateOfBirth_;
     this->telephoneNumber = telephoneNumber_;
     this->emailAddress = emailAddress_;
@@ -43,6 +43,6 @@ void Friend::setEmailAddress(const std::string& emailAddress_) {
     this->emailAddress = emailAddress_;
 }
 
-Type Friend::getType() {
-    return Type::Friend;
-}
+//Type Friend::getType() {
+//    return Type::Friend;
+//}

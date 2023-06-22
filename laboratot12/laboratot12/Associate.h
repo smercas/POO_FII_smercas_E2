@@ -9,5 +9,5 @@ public:
 	~Associate();
 	std::string getTelephoneNumber();
 	void setTelephoneNumber(const std::string&);
-	virtual Type getType() override final;
+	// virtual Type getType() override final;
 };

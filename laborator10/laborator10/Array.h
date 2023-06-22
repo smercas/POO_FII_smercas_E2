@@ -47,7 +47,7 @@ public:
 template<typename T>
 class CompareGreater : public Compare {
 	virtual bool CompareElements(void* a, void* b) override final {
-		if ((T*)a > (T*)b) {
+		if (*(T*)a > *(T*)b) {
 			return true;
 		}
 		return false;
@@ -57,7 +57,7 @@ class CompareGreater : public Compare {
 template<typename T>
 class CompareLesser : public Compare {
 	virtual bool CompareElements(void* a, void* b) override final {
-		if ((T*)a < (T*)b) {
+		if (*(T*)a < *(T*)b) {
 			return true;
 		}
 		return false;
@@ -67,7 +67,7 @@ class CompareLesser : public Compare {
 template<typename T>
 class CompareEqual : public Compare {
 	virtual bool CompareElements(void* a, void* b) override final {
-		if ((T*)a == (T*)b) {
+		if (*(T*)a == *(T*)b) {
 			return true;
 		}
 		return false;
@@ -77,7 +77,7 @@ class CompareEqual : public Compare {
 template<typename T>
 class CompareNotEqual : public Compare {
 	virtual bool CompareElements(void* a, void* b) override final {
-		if ((T*)a != (T*)b) {
+		if (*(T*)a != *(T*)b) {
 			return true;
 		}
 		return false;
@@ -347,7 +347,7 @@ public:
 		while (i < this->Capacity - 1) {
 			j = i + 1;
 			while (j < this->Capacity) {
-				if (this->List[i] != nullptr && this->List[j] != nullptr && comparator->CompareElements((void*)(this->List[i]), (void*)(this->List[j]))) {
+				if (this->List[i] != nullptr && this->List[j] != nullptr && comparator->CompareElements(this->List[i], this->List[j])) {
 					aux = this->List[i];
 					this->List[i] = this->List[j];
 					this->List[j] = aux;
@@ -366,7 +366,7 @@ public:
 				return middle;
 			}
 			else {
-				return BinarySearchHelper(elem, begin, middle) + BinarySearchHelper(elem, middle + 1, end);
+				return BinarySearchHelper(elem, begin, middle - 1) + BinarySearchHelper(elem, middle + 1, end);
 			}
 		}
 		return 0;
@@ -381,7 +381,7 @@ public:
 				return middle;
 			}
 			else {
-				return BinarySearchHelper(elem, begin, middle, compare) + BinarySearchHelper(elem, middle + 1, end, compare);
+				return BinarySearchHelper(elem, begin, middle - 1, compare) + BinarySearchHelper(elem, middle + 1, end, compare);
 			}
 		}
 		return 0;
@@ -396,7 +396,7 @@ public:
 				return middle;
 			}
 			else {
-				return BinarySearchHelper(elem, begin, middle, comparator) + BinarySearchHelper(elem, middle + 1, end, comparator);
+				return BinarySearchHelper(elem, begin, middle - 1, comparator) + BinarySearchHelper(elem, middle + 1, end, comparator);
 			}
 		}
 		return 0;
@@ -434,7 +434,6 @@ public:
 	template<class T, class e = std::equal_to<T>, class l = std::less<T>>
 	class ArrayIterator {
 	private:
-		friend class Array;
 		Array<T, e, l>* _array;
 		uint64_t current;
 	public:

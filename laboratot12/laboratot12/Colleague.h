@@ -15,5 +15,5 @@ public:
 	void setCompany(const std::string&);
 	std::string getEmailAddress();
 	void setEmailAddress(const std::string&);
-	virtual Type getType() override final;
+	//virtual Type getType() override final;
 };
